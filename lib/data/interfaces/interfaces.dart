@@ -1,4 +1,6 @@
-abstract class AuthInterface {
+//abstrat classes
+
+abstract class Interfaces {
   Future<void> signup(
     String email,
     String fullName,

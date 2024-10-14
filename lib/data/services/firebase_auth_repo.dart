@@ -4,11 +4,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:grocery_user_app/data/repository/firebase_auth_repo.dart';
 import 'package:grocery_user_app/data/models/user_model.dart';
 
-import '../interfaces/auth_interfaces/auth_interface.dart';
+import '../interfaces/interfaces.dart';
 
-class FirebaseAuthRepo implements AuthInterface {
+class FirebaseAuthServices implements Interfaces {
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
-  final FirebaseAuthData firebaseAuthData = FirebaseAuthData();
+  final FirebaseAuthRepo firebaseAuthRepo = FirebaseAuthRepo();
 
   @override
   Future<void> signup(
@@ -32,7 +32,7 @@ class FirebaseAuthRepo implements AuthInterface {
           updatedAt: DateTime.now(),
           createdAt: DateTime.now(),
         );
-        await firebaseAuthData.addUsersData(userModel);
+        await firebaseAuthRepo.addUsersData(userModel);
       }
     } catch (e) {
       print("Error : $e");

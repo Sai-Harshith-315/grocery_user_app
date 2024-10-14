@@ -2,13 +2,14 @@
 
 import 'package:get/get.dart';
 
-import '../../data/interfaces/auth_interfaces/auth_interface.dart';
+import '../data/interfaces/interfaces.dart';
 
 class SignupController extends GetxController {
-  final AuthInterface authServiceRepo;
+  final Interfaces interfaces;
   var isLoading = false.obs;
+  var toggleIcon = false.obs;
 
-  SignupController({required this.authServiceRepo});
+  SignupController({required this.interfaces});
 
   //signup
   Future<void> signup(
@@ -19,7 +20,7 @@ class SignupController extends GetxController {
   ) async {
     try {
       isLoading.value = true;
-      await authServiceRepo.signup(
+      await interfaces.signup(
         email,
         fullName,
         phoneNumber,

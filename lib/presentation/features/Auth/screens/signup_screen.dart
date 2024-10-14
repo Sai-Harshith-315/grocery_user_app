@@ -3,7 +3,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:grocery_user_app/domain/controllers/signup_controller.dart';
+import 'package:grocery_user_app/controllers/signup_controller.dart';
 import 'package:grocery_user_app/presentation/features/Home/screens/home_screen.dart';
 import 'package:grocery_user_app/presentation/widgets/my_textFormField.dart';
 import 'package:grocery_user_app/presentation/widgets/my_text_wiget.dart';

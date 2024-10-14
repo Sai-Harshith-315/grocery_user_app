@@ -1,10 +1,11 @@
 // ignore_for_file: avoid_print
 
 import 'package:get/get.dart';
-import 'package:grocery_user_app/domain/repository/auth_service_repo.dart';
+
+import '../../data/interfaces/auth_interfaces/auth_interface.dart';
 
 class SignupController extends GetxController {
-  final AuthServiceRepo authServiceRepo;
+  final AuthInterface authServiceRepo;
   var isLoading = false.obs;
 
   SignupController({required this.authServiceRepo});

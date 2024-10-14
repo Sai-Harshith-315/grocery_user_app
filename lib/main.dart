@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:grocery_user_app/data/firebase_options.dart';
 import 'package:grocery_user_app/presentation/features/Auth/screens/signup_screen.dart';
-
 import 'domain/bindings/bindings.dart';
 
 Future<void> main(List<String> args) async {

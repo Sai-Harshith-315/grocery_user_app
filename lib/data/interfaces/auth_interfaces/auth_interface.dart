@@ -1,4 +1,4 @@
-abstract class AuthServiceRepo {
+abstract class AuthInterface {
   Future<void> signup(
     String email,
     String fullName,

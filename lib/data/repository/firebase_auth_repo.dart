@@ -1,50 +1,37 @@
-// ignore_for_file: unnecessary_null_comparison, annotate_overrides
+// ignore_for_file: avoid_print
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:grocery_user_app/data/firebase_data/firebase_auth_data.dart';
 import 'package:grocery_user_app/data/models/user_model.dart';
-import 'package:grocery_user_app/domain/repository/auth_service_repo.dart';
 
-class FirebaseAuthRepo implements AuthServiceRepo {
+class FirebaseAuthData {
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
-  final FirebaseAuthData firebaseAuthData = FirebaseAuthData();
+  final FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
 
-  @override
-  Future<void> signup(
-    String fullName,
-    String email,
-    String phoneNumber,
-    String passwordHash,
-  ) async {
+//add user data to the firevbase
+  Future<void> addUsersData(UserModel userModel) async {
     try {
-      UserCredential userCredential = await firebaseAuth
-          .createUserWithEmailAndPassword(email: email, password: passwordHash);
-
-      if (userCredential != null) {
-        final UserModel userModel = UserModel(
-          userId: firebaseAuth.currentUser!.uid,
-          fullName: fullName,
-          email: email,
-          phoneNumber: phoneNumber,
-          passwordHash: passwordHash,
-          role: UserRole.Customer,
-          updatedAt: DateTime.now(),
-          createdAt: DateTime.now(),
-        );
-        await firebaseAuthData.addUsersData(userModel);
+      User? user = firebaseAuth.currentUser;
+      if (user != null) {
+        await firebaseFirestore
+            .collection('users')
+            .doc(user.uid)
+            .set(userModel.toMap());
       }
     } catch (e) {
-      print("Error : $e");
+      print("Error occured in adding user data to firebase : $e");
     }
   }
 
-  @override
-  Future<void> login(String email, String password) async {
-    UserCredential userCredential = await firebaseAuth
-        .signInWithEmailAndPassword(email: email, password: password);
-    if (userCredential != null) {}
+  //getUserdata
+  Future<void> getUserData() async {
+    try {
+      User? user = firebaseAuth.currentUser;
+      if (user != null) {
+        await firebaseFirestore.collection('users').doc(user.uid).get();
+      }
+    } catch (e) {
+      print("Error when etching the users data");
+    }
   }
-
-  @override
-  Future<void> logout() async {}
 }

@@ -1,13 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
+import 'package:grocery_user_app/controllers/login_controller.dart';
 import 'package:grocery_user_app/presentation/constants/colors.dart';
 import 'package:grocery_user_app/routing/app_routes.dart';
 
 import '../../../widgets/my_textFormField.dart';
 import '../../../widgets/my_text_wiget.dart';
+import '../../Home/screens/home_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -19,6 +19,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   TextEditingController userEmail = TextEditingController();
   TextEditingController userPassword = TextEditingController();
+  final LoginController loginController = Get.find<LoginController>();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -96,37 +97,34 @@ class _LoginScreenState extends State<LoginScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      /*  signupController.isLoading.value
+                      Obx(
+                        () => loginController.isLoading.value
                             ? const CupertinoActivityIndicator()
-                            : */
-                      MaterialButton(
-                        height: 70,
-                        minWidth: MediaQuery.of(context).size.width * .85,
-                        color: greencolor,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        onPressed: () async {
-                          /* if (userEmail.text != '' &&
-                                      userFullName.text != '' &&
-                                      userPassword != '' &&
-                                      userPhoneNumber != '') {
-                                    await signupController.signup(
-                                      userFullName.text.trim(),
-                                      userEmail.text.trim(),
-                                      userPhoneNumber.text.trim(),
-                                      userPassword.text.trim(),
-                                    );
-                                    Get.to(() => const HomeScreen());
+                            : MaterialButton(
+                                height: 70,
+                                minWidth:
+                                    MediaQuery.of(context).size.width * .85,
+                                color: greencolor,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                onPressed: () async {
+                                  if (userEmail.text != '' &&
+                                      userPassword.text != '') {
+                                    await loginController.login(
+                                        userEmail.text, userPassword.text);
+                                    // Get.to(() => const HomeScreen());
+                                    Get.toNamed(AppRoutes.homeScreen);
                                   } else {
                                     print('Something went wrong');
-                                  } */
-                        },
-                        child: MyText(
-                          text: 'Sign up',
-                          color: white,
-                          fontSize: 14,
-                        ),
+                                  }
+                                },
+                                child: MyText(
+                                  text: 'Login',
+                                  color: white,
+                                  fontSize: 14,
+                                ),
+                              ),
                       ),
                     ],
                   ),

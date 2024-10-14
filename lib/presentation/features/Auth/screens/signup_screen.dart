@@ -152,12 +152,13 @@ class _SignupScreenState extends State<SignupScreen> {
                                       userPassword != '' &&
                                       userPhoneNumber != '') {
                                     await signupController.signup(
-                                      userFullName.text.trim(),
                                       userEmail.text.trim(),
+                                      userFullName.text.trim(),
                                       userPhoneNumber.text.trim(),
                                       userPassword.text.trim(),
                                     );
-                                    Get.to(() => const HomeScreen());
+                                    // Get.to(() => const HomeScreen());
+                                    Get.toNamed(AppRoutes.homeScreen);
                                   } else {
                                     print('Something went wrong');
                                   }

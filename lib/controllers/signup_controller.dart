@@ -1,15 +1,14 @@
 // ignore_for_file: avoid_print
 
 import 'package:get/get.dart';
-
-import '../data/interfaces/interfaces.dart';
+import '../data/repository/firebase_auth_repo.dart';
 
 class SignupController extends GetxController {
-  final Interfaces interfaces;
+  final FirebaseAuthRepo firebaseAuthRepo;
   var isLoading = false.obs;
   var toggleIcon = false.obs;
 
-  SignupController({required this.interfaces});
+  SignupController({required this.firebaseAuthRepo});
 
   //signup
   Future<void> signup(
@@ -20,12 +19,8 @@ class SignupController extends GetxController {
   ) async {
     try {
       isLoading.value = true;
-      await interfaces.signup(
-        email,
-        fullName,
-        phoneNumber,
-        password,
-      );
+
+      await firebaseAuthRepo.signup(email, password, fullName, phoneNumber);
       Get.snackbar('Success', "user signed up successfully");
     } catch (e) {
       Get.snackbar('Error', 'Failed to sign up');

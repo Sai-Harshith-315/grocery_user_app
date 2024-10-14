@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:grocery_user_app/controllers/signup_controller.dart';
 import '../data/interfaces/interfaces.dart';
-import '../data/services/firebase_auth_repo.dart';
+import '../data/services/firebase_auth_services.dart';
 
 class AppBindings extends Bindings {
   @override

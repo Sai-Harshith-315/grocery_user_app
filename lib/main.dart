@@ -21,10 +21,8 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       initialBinding: AppBindings(),
-      initialRoute: AppRoutes.signupScreen,
+      initialRoute: AppRoutes.loginScreen,
       getPages: AppRoutes.routes,
-
-      // home: SignupScreen(),
     );
   }
 }

@@ -1,29 +1,24 @@
-// ignore_for_file: avoid_print
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:grocery_user_app/controllers/signup_controller.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:grocery_user_app/presentation/constants/colors.dart';
-import 'package:grocery_user_app/presentation/features/Home/screens/home_screen.dart';
-import 'package:grocery_user_app/presentation/widgets/my_textFormField.dart';
-import 'package:grocery_user_app/presentation/widgets/my_text_wiget.dart';
 import 'package:grocery_user_app/routing/app_routes.dart';
 
-class SignupScreen extends StatefulWidget {
-  const SignupScreen({super.key});
+import '../../../widgets/my_textFormField.dart';
+import '../../../widgets/my_text_wiget.dart';
+
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
 
   @override
-  State<SignupScreen> createState() => _SignupScreenState();
+  State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _SignupScreenState extends State<SignupScreen> {
-  final SignupController signupController = Get.find<SignupController>();
-
+class _LoginScreenState extends State<LoginScreen> {
   TextEditingController userEmail = TextEditingController();
-  TextEditingController userFullName = TextEditingController();
   TextEditingController userPassword = TextEditingController();
-  TextEditingController userPhoneNumber = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -53,18 +48,7 @@ class _SignupScreenState extends State<SignupScreen> {
                   const SizedBox(
                     height: 30,
                   ),
-                  //full name
-                  CustomTextFormField(
-                    controller: userFullName,
-                    hintText: 'Enter Name',
-                    label: MyText(
-                      text: 'Username',
-                      color: grey,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
+
                   //email
                   CustomTextFormField(
                     controller: userEmail,
@@ -90,64 +74,40 @@ class _SignupScreenState extends State<SignupScreen> {
                   const SizedBox(
                     height: 20,
                   ),
-
-                  RichText(
-                    text: const TextSpan(
-                      text: 'By Continuing you agree to our ', // Default text
-                      style: TextStyle(
-                        color: grey,
-                        fontSize: 14,
-                      ), // Default style
+                  GestureDetector(
+                    onTap: () {
+                      //forgot password screen
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        TextSpan(
-                          text: 'Terms of Service', // First clickable text
-                          style: TextStyle(
-                            color: Colors.green,
-                            fontSize: 14,
-                          ), // Make it green
-                        ),
-                        TextSpan(
-                          text: ' and ', // Default text
-                          style: TextStyle(
-                            color: grey,
-                            fontSize: 14,
-                          ),
-                        ),
-                        TextSpan(
-                          text: 'Privacy Policy', // Second clickable text
-                          style:
-                              TextStyle(color: Colors.green), // Make it green
-                        ),
-                        TextSpan(
-                          text: '.', // Default text
-                          style: TextStyle(
-                            color: Colors.green,
-                            fontSize: 14,
-                          ),
-                        ),
+                        MyText(
+                          text: 'Forgot password?',
+                          color: grey,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14,
+                        )
                       ],
                     ),
                   ),
-
                   const SizedBox(
                     height: 30,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Obx(
-                        () => signupController.isLoading.value
+                      /*  signupController.isLoading.value
                             ? const CupertinoActivityIndicator()
-                            : MaterialButton(
-                                height: 70,
-                                minWidth:
-                                    MediaQuery.of(context).size.width * .85,
-                                color: greencolor,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                                onPressed: () async {
-                                  if (userEmail.text != '' &&
+                            : */
+                      MaterialButton(
+                        height: 70,
+                        minWidth: MediaQuery.of(context).size.width * .85,
+                        color: greencolor,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        onPressed: () async {
+                          /* if (userEmail.text != '' &&
                                       userFullName.text != '' &&
                                       userPassword != '' &&
                                       userPhoneNumber != '') {
@@ -160,14 +120,13 @@ class _SignupScreenState extends State<SignupScreen> {
                                     Get.to(() => const HomeScreen());
                                   } else {
                                     print('Something went wrong');
-                                  }
-                                },
-                                child: MyText(
-                                  text: 'Sign up',
-                                  color: white,
-                                  fontSize: 14,
-                                ),
-                              ),
+                                  } */
+                        },
+                        child: MyText(
+                          text: 'Sign up',
+                          color: white,
+                          fontSize: 14,
+                        ),
                       ),
                     ],
                   ),
@@ -180,17 +139,17 @@ class _SignupScreenState extends State<SignupScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       MyText(
-                        text: 'Already have an account? ',
+                        text: "Don't have an account? ",
                         color: grey,
                         fontSize: 14,
                       ),
                       //Login In
                       GestureDetector(
                         onTap: () {
-                          Get.toNamed(AppRoutes.loginScreen);
+                          Get.toNamed(AppRoutes.signupScreen);
                         },
                         child: MyText(
-                          text: 'Login',
+                          text: 'Signup',
                           color: greencolor,
                           fontSize: 14,
                           fontWeight: FontWeight.bold,

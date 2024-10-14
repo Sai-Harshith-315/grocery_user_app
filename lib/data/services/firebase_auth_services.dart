@@ -43,7 +43,9 @@ class FirebaseAuthServices implements Interfaces {
   Future<void> login(String email, String password) async {
     UserCredential userCredential = await firebaseAuth
         .signInWithEmailAndPassword(email: email, password: password);
-    if (userCredential != null) {}
+    if (userCredential != null) {
+      await firebaseAuthRepo.getUserData();
+    }
   }
 
   @override
